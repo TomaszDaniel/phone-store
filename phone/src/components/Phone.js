@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PhoneOption from './PhoneOption';
+import './Phone.css';
+
 
 class Phone extends Component {
     state = {
@@ -15,11 +17,14 @@ class Phone extends Component {
                     value: null
                 }
             ],
-            amount: this.props.product.price
-        }
+            amount: this.props.product.price,
+        },
+        colorName: "-----",
+        capacityName: "-----"
     }
 
-    handleClick = (id, option, modifier) => {
+    handleClick = (id, option, modifier, name) => {
+
         const newProduct = this.state.product
         if (modifier > 0) {
             newProduct.amount = parseInt((this.props.product.price * modifier) / 100 + this.props.product.price)
@@ -32,7 +37,8 @@ class Phone extends Component {
             newOptions.value = id
             this.setState({
                 options: newOptions,
-                amount: newProduct
+                amount: newProduct,
+                colorName: name
             })
         } else if (option === 101) {
             const newOptions = this.state.product.options[1]
@@ -40,7 +46,8 @@ class Phone extends Component {
             newOptions.value = id
             this.setState({
                 options: newOptions,
-                amount: newProduct
+                amount: newProduct,
+                capacityName: name
             })
         }
     }
@@ -50,11 +57,13 @@ class Phone extends Component {
 
         return (
             <>
-                <p>{name}</p>
-                <p>{price}</p>
-                <p>{oldPrice}</p>
-                <PhoneOption click={this.handleClick} option={options} />
-                <button onClick={() => this.props.click(this.state)}>DoDAJ Do koszyka</button>
+                <div className="phone">
+                    <h1>{name}</h1>
+                    <h2>{price}</h2>
+                    <h6>{oldPrice}</h6>
+                    <PhoneOption click={this.handleClick} option={options} colorName={this.state.colorName} capacityName={this.state.capacityName} />
+                    <button onClick={() => this.props.click(this.state)}>Dodaj do koszyka</button>
+                </div>
             </>
         );
     }

@@ -1,0 +1,12 @@
+.phone{
+    width: 30%;
+    text-align: center;
+}
+
+.phone p{
+    font-weight: bold;
+}
+
+h6{
+    text-decoration: line-through;
+}

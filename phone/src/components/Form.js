@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Form.css';
 class Form extends Component {
     state = {
         name: "",
@@ -8,6 +9,7 @@ class Form extends Component {
         houseNumber: "",
         city: "",
         zipcode: "",
+        message: "",
         errors: {
             name: false,
             surename: false,
@@ -39,11 +41,16 @@ class Form extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        const sendState = this.state
+        const key = "errors"
+        delete sendState[key]
 
         const validation = this.formValidation()
 
         if (validation.correct) {
             console.log('wyslano');
+            const orderSend = [sendState, this.props.list.productList]
+            console.log(orderSend);
 
             this.setState({
                 name: "",
@@ -53,6 +60,7 @@ class Form extends Component {
                 houseNumber: "",
                 city: "",
                 zipcode: "",
+                message: "Wysłano formularz",
                 errors: {
                     name: false,
                     surname: false,
@@ -131,36 +139,66 @@ class Form extends Component {
             zipcode
         })
     }
+
+    componentDidUpdate() {
+        console.log("update");
+        if (this.state.message !== '') {
+            setTimeout(() => this.setState({
+                message: ''
+            }), 3000)
+        }
+    }
     render() {
+        const orderList = this.props.list.productList.map((order, index) => (
+            <p key={index}>{order.amount} PLN</p>
+        ))
+        const colorList = this.props.list.productColor.map((order, index) => (
+            <p key={index}>{order}</p>
+        ))
+        const capacityList = this.props.list.productCapacity.map((order, index) => (
+            <p key={index}>{order}</p>
+        ))
+
+
+
         return (
-            <form onSubmit={this.handleSubmit} >
-                <label htmlFor="name"> imie
+            <>
+                <h2>Podsumowanie zamówienia</h2>
+                <div>
+                    <div className="listItem">{colorList}</div>
+                    <div className="listItem">{capacityList}</div>
+                    <div className="listItem">{orderList}</div>
+                </div>
+                <form onSubmit={this.handleSubmit} >
+                    <label htmlFor="name"> imie
                     <input type="text" id="name" name="name" value={this.state.name} onChange={this.handleChange} placeholder={'imię'} />
-                    {this.state.errors.name && <span>{this.messages.name_incorrect}</span>}
-                </label>
-                <label htmlFor="surename"> nazwisko
+                        {this.state.errors.name && <span>{this.messages.name_incorrect}</span>}
+                    </label>
+                    <label htmlFor="surename"> nazwisko
                     <input type="text" id="surename" name="surename" value={this.state.surname} onChange={this.handleChange} placeholder={"nazwisko"} />
-                    {this.state.errors.surename && <span>{this.messages.surename_incorrect}</span>}
-                </label>
-                <label htmlFor="email"> email
+                        {this.state.errors.surename && <span>{this.messages.surename_incorrect}</span>}
+                    </label>
+                    <label htmlFor="email"> email
                     <input type="email" id="email" name="email" value={this.state.email} onChange={this.handleChange} placeholder={'email'} />
-                    {this.state.errors.email && <span>{this.messages.email_incorrect}</span>}
-                </label>
-                <label htmlFor="street"> ulica
+                        {this.state.errors.email && <span>{this.messages.email_incorrect}</span>}
+                    </label>
+                    <label htmlFor="street"> ulica
                     <input type="text" id="street" name="street" value={this.state.street} onChange={this.handleChange} placeholder={'ulica'} />
-                    {this.state.errors.street && <span>{this.messages.street_incorrect}</span>}
-                </label><label htmlFor="houseNumber">
-                    <input type="text" id="houseNumber" name="houseNumber" value={this.state.houseNumber} onChange={this.handleChange} placeholder={'numerdomu'} />
-                    {this.state.errors.houseNumber && <span>{this.messages.houseNumber_incorrect}</span>}
-                </label><label htmlFor="city">  miasto
+                        {this.state.errors.street && <span>{this.messages.street_incorrect}</span>}
+                    </label><label htmlFor="houseNumber">
+                        <input type="text" id="houseNumber" name="houseNumber" value={this.state.houseNumber} onChange={this.handleChange} placeholder={'numerdomu'} />
+                        {this.state.errors.houseNumber && <span>{this.messages.houseNumber_incorrect}</span>}
+                    </label><label htmlFor="city">  miasto
                     <input type="text" id="city" name="city" value={this.state.city} onChange={this.handleChange} placeholder={'miasto'} />
-                    {this.state.errors.city && <span>{this.messages.city_incorrect}</span>}
-                </label><label htmlFor="zipcode"> kod pocztowy
+                        {this.state.errors.city && <span>{this.messages.city_incorrect}</span>}
+                    </label><label htmlFor="zipcode"> kod pocztowy
                     <input type="text" id="zipcode" name="zipcode" value={this.state.zipcode} onChange={this.handleChange} placeholder={'kodpocztowy'} />
-                    {this.state.errors.zipcode && <span>{this.messages.zipcode_incorrect}</span>}
-                </label>
-                <button>Wyślij</button>
-            </form>
+                        {this.state.errors.zipcode && <span>{this.messages.zipcode_incorrect}</span>}
+                    </label>
+                    <button>Wyślij</button>
+                </form>
+                {this.state.message && <h3>{this.state.message}</h3>}
+            </>
         );
     }
 }

@@ -1,9 +1,15 @@
 import React from 'react';
 import './ModelOption.css';
 const ModelOption = (props) => {
+
+    const optionsValues = props.value.map(item => (
+        <button onClick={() => props.click(props.id, item.id, item.name, item.priceModifier)} key={item.id}>{item.name}</button>
+    ))
+
+
     return (
         <>
-            <button onClick={() => props.click(props.id, props.option, props.modifier, props.name)}>{props.name}</button>
+            {optionsValues}
         </>
     );
 }

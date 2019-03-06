@@ -49,7 +49,10 @@ class Form extends Component {
 
         if (validation.correct) {
             console.log('wyslano');
-            const orderSend = [sendState, this.props.list.productList]
+            const orderSend = {
+                user: sendState,
+                product: this.props.list.productList
+            }
             console.log(orderSend);
 
             this.setState({

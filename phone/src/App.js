@@ -1,33 +1,36 @@
 import React, { Component } from 'react';
 import products from '../src/products.json';
-import Phone from './components/Phone';
-import Form from './components/Form';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Product from './components/Product';
+// import Form from './components/Form';
 import './App.css';
 
 
 class App extends Component {
   state = {
     productList: [],
-    productColor: [],
-    productCapacity: [],
   }
   handleClick = (products) => {
-    const myArray = products.product.options.filter(option => option.id === null)
-    if (myArray.length !== 0) {
-      alert('Zanim dodasz produkt do koszyka, musisz ustalić jego cechy')
-    } else {
-      this.setState({
-        productList: this.state.productList.concat(products.product),
-        productColor: this.state.productColor.concat(products.colorName),
-        productCapacity: this.state.productCapacity.concat(products.capacityName)
-      })
-    }
+    console.log(products);
+
+    products.options.forEach(product => {
+      if (product.value === null) {
+        alert('Nie wybrano wszystkich cech produktu')
+      }
+    })
+
+    const array = this.state.productList
+    array.push(products)
+
+    this.setState({
+      productList: array
+    })
 
   }
   render() {
+    console.log(this.state);
+
     const array = products.map(product => (
-      <Phone click={this.handleClick} key={product.id} product={product} />
+      <Product click={this.handleClick} key={product.id} product={product} />
     ))
     return (
       <>
@@ -35,7 +38,7 @@ class App extends Component {
         <div className="main">
           {array}
         </div>
-        <Form list={this.state} />
+        {/* <Form list={this.state} /> */}
         <footer>Stopka</footer>
       </>
     );

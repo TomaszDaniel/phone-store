@@ -1,0 +1,23 @@
+.product{
+    width: 30%;
+    text-align: center;
+}
+
+.product p{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+h6{
+    text-decoration: line-through;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+}
+
+.btnAddToCart{
+    width: 80px;
+    margin-top: 10px;
+}

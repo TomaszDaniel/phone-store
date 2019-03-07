@@ -51,18 +51,20 @@ class Product extends Component {
         const list = this.state.options.map(element => (
             <li key={element.id}>{element.name}</li>
         ))
+        console.log(list);
+
         return (
             <>
-                <div className="phone">
+                <div className="product">
                     <h1>{name}</h1>
                     <h2>{price}</h2>
                     <h6>{oldPrice}</h6>
                     <ProductOption click={this.handleClick} option={options} />
-                    <ul>Twoje opcje to:
-                        {list}
+                    <ul>Wybrane opcje:
+                      {list}
                     </ul>
-                    <p>{this.state.amount}</p>
-                    <button onClick={() => this.props.click(this.state)}>Dodaj do koszyka</button>
+                    {(this.state.amount > 0) ? <p>{this.state.amount}</p> : null}
+                    <button className="btnAddToCart" onClick={() => this.props.click(this.state)}>Dodaj do koszyka</button>
                 </div>
             </>
         );

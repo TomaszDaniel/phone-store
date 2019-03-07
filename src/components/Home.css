@@ -1,0 +1,16 @@
+.home{
+    height: 90vh;
+    background-image: url("https://www.pcworld.pl/g1/news/thumbnails/3/0/308299_iphone_se_review_21_jpg_resize_1200x675.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-size: cover;
+}
+
+.welcome{
+    line-height: 90vh;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 72px;
+    text-align: center;
+}

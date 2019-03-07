@@ -8,7 +8,9 @@ const ProductOption = (props) => {
     const optionList = props.option.map((item, index) => (
         <div key={index}>
             <p >{item.name}</p>
-            <ModelOption value={item.values} id={item.id} click={props.click} />
+            <div className="option">
+                <ModelOption value={item.values} id={item.id} click={props.click} />
+            </div>
         </div>
     ))
 

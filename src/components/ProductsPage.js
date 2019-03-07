@@ -10,7 +10,9 @@ const ProductsPage = (props) => {
     return (
         <>
             {< div className="main" >
-                {array}
+                <div className="wrapper">
+                    {array}
+                </div>
             </div >}
         </>
     );

@@ -64,7 +64,7 @@ class Form extends Component {
                 houseNumber: "",
                 city: "",
                 zipcode: "",
-                message: "Wysłano formularz",
+                message: "Twoje zamówienie zostało poprawnie złożone",
                 errors: {
                     name: false,
                     surname: false,
@@ -76,6 +76,7 @@ class Form extends Component {
                     cart: false
                 }
             })
+            document.querySelector("form").style.display = "none"
         } else {
             this.setState({
                 errors: {
@@ -164,35 +165,34 @@ class Form extends Component {
         return (
             <>
                 <form onSubmit={this.handleSubmit} >
-                    <label htmlFor="name"> imie
+                    <label htmlFor="name">Imię </label>
                     <input type="text" id="name" name="name" value={this.state.name} onChange={this.handleChange} placeholder={'imię'} />
-                        {this.state.errors.name && <span>{this.messages.name_incorrect}</span>}
-                    </label>
-                    <label htmlFor="surename"> nazwisko
+                    {this.state.errors.name && <sub>{this.messages.name_incorrect}</sub>}
+
+                    <label htmlFor="surename"> Nazwisko </label>
                     <input type="text" id="surename" name="surename" value={this.state.surname} onChange={this.handleChange} placeholder={"nazwisko"} />
-                        {this.state.errors.surename && <span>{this.messages.surename_incorrect}</span>}
-                    </label>
-                    <label htmlFor="email"> email
+                    {this.state.errors.surename && <sub>{this.messages.surename_incorrect}</sub>}
+
+                    <label htmlFor="email"> Email </label>
                     <input type="email" id="email" name="email" value={this.state.email} onChange={this.handleChange} placeholder={'email'} />
-                        {this.state.errors.email && <span>{this.messages.email_incorrect}</span>}
-                    </label>
-                    <label htmlFor="street"> ulica
+                    {this.state.errors.email && <sub>{this.messages.email_incorrect}</sub>}
+
+                    <label htmlFor="street"> Ulica </label>
                     <input type="text" id="street" name="street" value={this.state.street} onChange={this.handleChange} placeholder={'ulica'} />
-                        {this.state.errors.street && <span>{this.messages.street_incorrect}</span>}
-                    </label><label htmlFor="houseNumber">
-                        <input type="text" id="houseNumber" name="houseNumber" value={this.state.houseNumber} onChange={this.handleChange} placeholder={'numerdomu'} />
-                        {this.state.errors.houseNumber && <span>{this.messages.houseNumber_incorrect}</span>}
-                    </label><label htmlFor="city">  miasto
+                    {this.state.errors.street && <sub>{this.messages.street_incorrect}</sub>}
+                    <label htmlFor="houseNumber"> Numer domu</label>
+                    <input type="text" id="houseNumber" name="houseNumber" value={this.state.houseNumber} onChange={this.handleChange} placeholder={'numerdomu'} />
+                    {this.state.errors.houseNumber && <sub>{this.messages.houseNumber_incorrect}</sub>}
+                    <label htmlFor="city">  Miasto </label>
                     <input type="text" id="city" name="city" value={this.state.city} onChange={this.handleChange} placeholder={'miasto'} />
-                        {this.state.errors.city && <span>{this.messages.city_incorrect}</span>}
-                    </label><label htmlFor="zipcode"> kod pocztowy
+                    {this.state.errors.city && <sub>{this.messages.city_incorrect}</sub>}
+                    <label htmlFor="zipcode"> Kod pocztowy </label>
                     <input type="text" id="zipcode" name="zipcode" value={this.state.zipcode} onChange={this.handleChange} placeholder={'kodpocztowy'} />
-                        {this.state.errors.zipcode && <span>{this.messages.zipcode_incorrect}</span>}
-                    </label>
-                    {this.state.errors.cart && <span>{this.messages.cart_incorrect}</span>}
-                    <button>Zapłać</button>
+                    {this.state.errors.zipcode && <sub>{this.messages.zipcode_incorrect}</sub>}
+                    {this.state.errors.cart && <sub>{this.messages.cart_incorrect}</sub>}
+                    <button className="formBtn" >Zapłać</button>
                 </form>
-                {this.state.message && <h3>{this.state.message}</h3>}
+                {this.state.message && alert(this.state.message)}
             </>
         );
     }

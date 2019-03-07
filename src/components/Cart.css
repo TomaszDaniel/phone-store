@@ -1,0 +1,40 @@
+span{
+    margin-left: 30px;
+}
+
+.pictureCart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 90vh;
+    width: 100%;
+    background-image: url("https://www.directpay.online/wp-content/uploads/2018/06/shutterstock_313339838_1440.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.orderSummary{
+    text-align: center;
+    color: #fff;
+    letter-spacing: 2px;
+    font-size: 52px;
+    margin-top: 15vh;
+}
+
+table{
+    width: 40%;
+    text-align: center;
+    margin-top: 5vh;
+    color: #fff;
+}
+
+.payment{
+    margin-top: 20px;
+    text-align: center;
+    color: #fff;
+}
+
+.btnBuy{
+   margin-top: 20px;
+}

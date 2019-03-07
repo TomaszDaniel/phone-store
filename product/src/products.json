@@ -41,27 +41,6 @@
 						"priceModifier": 40.00
 					}
 				]
-			},
-			{
-				"id": 1300,
-				"name": "dfsdfsdColor",
-				"values": [
-					{
-						"id": 65,
-						"name": "Silver",
-						"priceModifier": 10
-					},
-					{
-						"id": 43,
-						"name": "Space Gray",
-						"priceModifier": 40
-					},
-					{
-						"id": 12,
-						"name": "Gold",
-						"priceModifier": 0
-					}
-				]
 			}
 		]
 	},

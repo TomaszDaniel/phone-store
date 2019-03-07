@@ -18,6 +18,7 @@ class Form extends Component {
             houseNumber: false,
             city: false,
             zipcode: false,
+            cart: false
         }
     }
 
@@ -28,7 +29,8 @@ class Form extends Component {
         street_incorrect: 'Nazwa ulicy musi mieć co najmniej 3 znaki',
         houseNumber_incorrect: 'Max 3 cyfry',
         city_incorrect: 'Nazwa musi być dłuższa niż 2 znaki',
-        zipcode_incorrect: 'Prawidłowa forma **-***'
+        zipcode_incorrect: 'Prawidłowa forma **-***',
+        cart_incorrect: 'Nie wybrałeś żadnego produktu'
     }
 
     handleChange = (e) => {
@@ -51,10 +53,9 @@ class Form extends Component {
             console.log('wyslano');
             const orderSend = {
                 user: sendState,
-                product: this.props.list.productList
+                product: this.props.list
             }
             console.log(orderSend);
-
             this.setState({
                 name: "",
                 surename: "",
@@ -72,6 +73,7 @@ class Form extends Component {
                     houseNumber: false,
                     city: false,
                     zipcode: false,
+                    cart: false
                 }
             })
         } else {
@@ -83,7 +85,8 @@ class Form extends Component {
                     street: !validation.street,
                     houseNumber: !validation.houseNumber,
                     city: !validation.city,
-                    zipcode: !validation.zipcode
+                    zipcode: !validation.zipcode,
+                    cart: !validation.cart,
                 }
             })
         }
@@ -98,6 +101,7 @@ class Form extends Component {
         let houseNumber = false;
         let city = false;
         let zipcode = false;
+        let cart = false;
 
         if (this.state.name.length > 2 && this.state.name.indexOf(' ') === -1) {
             name = true;
@@ -127,7 +131,11 @@ class Form extends Component {
             zipcode = true
         }
 
-        if (name && surename && email && street && houseNumber && city && zipcode) {
+        if (this.props.list.length > 0) {
+            cart = true
+        }
+
+        if (name && surename && email && street && houseNumber && city && zipcode && cart) {
             correct = true
         }
 
@@ -139,12 +147,12 @@ class Form extends Component {
             street,
             houseNumber,
             city,
-            zipcode
+            zipcode,
+            cart
         })
     }
 
     componentDidUpdate() {
-        console.log("update");
         if (this.state.message !== '') {
             setTimeout(() => this.setState({
                 message: ''
@@ -152,26 +160,9 @@ class Form extends Component {
         }
     }
     render() {
-        const orderList = this.props.list.productList.map((order, index) => (
-            <p key={index}>{order.amount} PLN</p>
-        ))
-        const colorList = this.props.list.productColor.map((order, index) => (
-            <p key={index}>{order}</p>
-        ))
-        const capacityList = this.props.list.productCapacity.map((order, index) => (
-            <p key={index}>{order}</p>
-        ))
-
-
 
         return (
             <>
-                <h2>Podsumowanie zamówienia</h2>
-                <div>
-                    <div className="listItem">{colorList}</div>
-                    <div className="listItem">{capacityList}</div>
-                    <div className="listItem">{orderList}</div>
-                </div>
                 <form onSubmit={this.handleSubmit} >
                     <label htmlFor="name"> imie
                     <input type="text" id="name" name="name" value={this.state.name} onChange={this.handleChange} placeholder={'imię'} />
@@ -198,7 +189,8 @@ class Form extends Component {
                     <input type="text" id="zipcode" name="zipcode" value={this.state.zipcode} onChange={this.handleChange} placeholder={'kodpocztowy'} />
                         {this.state.errors.zipcode && <span>{this.messages.zipcode_incorrect}</span>}
                     </label>
-                    <button>Wyślij</button>
+                    {this.state.errors.cart && <span>{this.messages.cart_incorrect}</span>}
+                    <button>Zapłać</button>
                 </form>
                 {this.state.message && <h3>{this.state.message}</h3>}
             </>
